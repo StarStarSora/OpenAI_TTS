@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text to Speech Converter</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .radio-group {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .radio-option input[type="radio"] {
+            width: 1.25rem;
+            height: 1.25rem;
+            border: 2px solid #d1d5db;
+            border-radius: 50%;
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        .radio-option input[type="radio"]:checked {
+            border-color: #2563eb;
+            background-color: #2563eb;
+            background-image: radial-gradient(white 35%, transparent 40%);
+        }
+        .radio-option label {
+            cursor: pointer;
+            user-select: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 flex items-center justify-center min-h-screen">
+    <div class="w-full max-w-3xl bg-white rounded-xl shadow-lg p-8 m-4">
+        <h1 class="text-2xl font-semibold mb-8">Text to Speech Converter</h1>
+        
+        <!-- TTS Model -->
+        <div class="mb-6">
+            <label class="block text-sm font-medium text-gray-700 mb-2">TTS Model</label>
+            <div class="radio-group">
+                <div class="radio-option">
+                    <input type="radio" id="tts-1" name="model" value="tts-1" checked>
+                    <label for="tts-1">tts-1 (Faster)</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="tts-1-hd" name="model" value="tts-1-hd">
+                    <label for="tts-1-hd">tts-1-hd (Higher Quality)</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Voice Selection -->
+        <div class="mb-8">
+            <label class="block text-sm font-medium text-gray-700 mb-2">Voice</label>
+            <div class="radio-group">
+                <div class="radio-option">
+                    <input type="radio" id="alloy" name="voice" value="alloy" checked>
+                    <label for="alloy">Alloy</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="echo" name="voice" value="echo">
+                    <label for="echo">Echo</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="fable" name="voice" value="fable">
+                    <label for="fable">Fable</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="onyx" name="voice" value="onyx">
+                    <label for="onyx">Onyx</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="nova" name="voice" value="nova">
+                    <label for="nova">Nova</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="shimmer" name="voice" value="shimmer">
+                    <label for="shimmer">Shimmer</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Text Input -->
+        <div class="mb-6">
+            <label class="block text-sm font-medium text-gray-700 mb-2">Text to Convert</label>
+            <textarea
+                id="text-input"
+                rows="6"
+                class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none resize-vertical"
+                placeholder="Enter text to convert to speech..."></textarea>
+        </div>
+
+        <!-- Convert Button -->
+        <button id="convert-btn" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors">
+            Convert to Speech
+        </button>
+
+        <!-- Loading -->
+        <div id="loader" class="hidden mt-4 text-center text-gray-600">
+            Converting...
+        </div>
+
+        <!-- Result -->
+        <div id="result" class="hidden mt-4">
+            <audio id="audio-player" controls class="w-full">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('convert-btn').addEventListener('click', async () => {
+            const text = document.getElementById('text-input').value;
+            const model = document.querySelector('input[name="model"]:checked').value;
+            const voice = document.querySelector('input[name="voice"]:checked').value;
+            
+            if (!text) {
+                alert('Please enter some text to convert');
+                return;
+            }
+
+            document.getElementById('loader').classList.remove('hidden');
+            document.getElementById('result').classList.add('hidden');
+            document.getElementById('convert-btn').disabled = true;
+
+            try {
+                const response = await fetch(`/proxy?query=${encodeURIComponent(text)}&model=${model}&voice=${voice}`);
+                
+                if (!response.ok) {
+                    throw new Error('Conversion failed');
+                }
+
+                const audioBlob = await response.blob();
+                const audioUrl = URL.createObjectURL(audioBlob);
+                const audioPlayer = document.getElementById('audio-player');
+                audioPlayer.src = audioUrl;
+                
+                document.getElementById('result').classList.remove('hidden');
+                audioPlayer.play();
+            } catch (error) {
+                alert('Error converting text to speech: ' + error.message);
+            } finally {
+                document.getElementById('loader').classList.add('hidden');
+                document.getElementById('convert-btn').disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>

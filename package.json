@@ -1,0 +1,14 @@
+{
+  "name": "openai-tts",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "server.mjs",
+  "scripts": {
+    "start": "node server.mjs"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "openai": "^4.28.0"
+  }
+}
