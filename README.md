@@ -2,6 +2,10 @@
 
 A web application that converts text to speech using OpenAI's TTS API. Perfect for practicing English speaking, especially for IELTS preparation. You can write your own speaking materials and convert them to natural-sounding speech for listening and mimicking.
 
+## Preview
+![web preview](./images/preview.png)
+
+
 ## Background
 
 This tool is designed to help English learners, particularly IELTS candidates, improve their speaking skills by:
