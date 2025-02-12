@@ -1,66 +1,86 @@
-# OpenAI Text-to-Speech Practice Tool
+# English Practice Text-to-Speech Tool
 
-A web application that converts text to speech using OpenAI's TTS API. Perfect for practicing English speaking, especially for IELTS preparation. You can write your own speaking materials and convert them to natural-sounding speech for listening and mimicking.
+A powerful web application that transforms text into natural-sounding speech using OpenAI's TTS API. Perfect for English learners who want to improve their listening and speaking skills through authentic audio practice.
 
 ## Preview
 ![web preview](./images/preview.png)
+![web preview](./images/preview2.png)
 
+## Why Use This Tool?
 
-## Background
+This tool is your perfect companion for English practice, offering:
+- Natural pronunciation of any text you write
+- Multiple voice options for diverse listening experience
+- Special dialogue mode for conversation practice
+- Easy saving of audio files for repeated practice
+- Perfect for self-study and exam preparation (IELTS, TOEFL, etc.)
 
-This tool is designed to help English learners, particularly IELTS candidates, improve their speaking skills by:
-- Converting your written responses to natural speech
-- Hearing proper pronunciation of your prepared materials
-- Creating practice materials for shadowing exercises
-- Saving model answers as audio files for repeated practice
+## Key Features
 
-## Features
-
-- Multiple voice options (Alloy, Echo, Fable, Onyx, Nova, Shimmer)
-- Two quality levels: faster conversion (tts-1) or higher quality (tts-1-hd)
-- Simple and clean interface
-- Audio playback controls
+- **Dialogue Mode**: Convert conversations with different voices for each speaker
+- **Multiple Voice Options**: Choose from six distinct voices (Alloy, Echo, Fable, Onyx, Nova, Shimmer)
+- **Quality Settings**: Select between standard (faster) or HD (higher quality) conversion
+- **Easy-to-Use Interface**: Clean design focused on learning
+- **Audio Controls**: Pause, replay, and adjust playback speed
+- **Save Function**: Download audio files for offline practice
 
 ## Setup
 
 1. Clone the repository
 
-2. Create `.env` file in root:
+2. Install system requirements:
+- For Windows: Download and install ffmpeg from https://ffmpeg.org/download.html
+- For macOS: brew install ffmpeg
+- For Linux: sudo apt install ffmpeg
 
+3. Create `.env` file in root:
 ```bash
 OPENAI_API_KEY=your-openai-api-key
 ```
 
-3. Install dependencies:
+4. Install dependencies:
 ```bash
 npm install
 ```
 
-4. Start server:
+5. Start server:
 ```bash
 npm start
 ```
 
 Visit `http://localhost:3000` in your browser.
 
-## Usage Example
+## Usage Examples
 
-1. Type or paste your speaking practice material:
+### Single Speaker Practice
 ```
-Some people believe that extreme sports help build character.
-To what extent do you agree or disagree with this statement?
+Topic: Environmental Protection
 
-Well, I believe extreme sports can significantly contribute to character development.
-Firstly, these activities push individuals out of their comfort zones...
+Many people believe that individual actions can't make a difference in protecting the environment. Do you agree or disagree?
+
+Well, I strongly disagree with this viewpoint. Individual actions, when combined, can create significant positive impact on our environment...
 ```
 
-2. Select voice and quality preferences
-3. Click "Convert to Speech"
-4. Save the audio for practice
+### Dialogue Practice
+```
+Interviewer: Can you tell me about your hometown?
+Candidate: Yes, I come from a coastal city in the south. It's known for its beautiful beaches and seafood.
+Interviewer: What's your favorite thing about living there?
+Candidate: I'd say the relaxed lifestyle and the fresh sea breeze...
+```
 
-## Note
+## Learning Tips
 
-You need an OpenAI API key with access to the TTS models. Visit [OpenAI Platform](https://platform.openai.com/) to get your API key.
+1. **Shadow Speaking**: Listen and repeat to improve pronunciation
+2. **Conversation Practice**: Use dialogue mode for interview preparation
+3. **Accent Training**: Try different voices to practice understanding various accents
+4. **Exam Preparation**: Record model answers for IELTS/TOEFL speaking tasks
+5. **Vocabulary Practice**: Create audio flashcards with example sentences
+
+## Requirements
+
+- Node.js
+- OpenAI API key with TTS access (Get it from [OpenAI Platform](https://platform.openai.com/))
 
 ## Dependencies
 
@@ -68,3 +88,7 @@ You need an OpenAI API key with access to the TTS models. Visit [OpenAI Platform
 - Express
 - OpenAI API
 - dotenv
+
+## Note
+
+This tool requires an OpenAI API key. Make sure you have access to the TTS models before setting up.

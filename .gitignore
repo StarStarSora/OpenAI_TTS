@@ -36,3 +36,8 @@ Thumbs.db
 # Build output
 dist/
 build/
+
+# Temporary files
+tmp/
+temp/
+*.mp3
